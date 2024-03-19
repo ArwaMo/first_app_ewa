@@ -17,7 +17,8 @@ class CategoryScreen extends StatelessWidget {
             ),
             const Text(
               'CHOOSE CATEGORY',
-              style: TextStyle(color: Colors.yellow, fontSize: 43),
+              style: TextStyle(
+                  color: Colors.yellow, fontSize: 43, fontFamily: 'Mogra'),
               textAlign: TextAlign.center,
             ),
             const SizedBox(
@@ -74,9 +75,7 @@ class CategoryScreen extends StatelessWidget {
                 Center(
                     child: Text(
                   text,
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
+                  style: const TextStyle(fontSize: 20, fontFamily: 'Mogra'),
                 )),
               ],
             )),

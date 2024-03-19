@@ -20,7 +20,10 @@ class QuestionScreen extends StatelessWidget {
               alignment: AlignmentDirectional.topStart,
               child: Text(
                 'Question 13/50',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    fontFamily: 'Mogra'),
               ),
             ),
             const SizedBox(
@@ -71,14 +74,16 @@ class QuestionScreen extends StatelessWidget {
         children: [
           Text(
             text1,
-            style: const TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black, fontFamily: 'Mogra'),
           ),
           const SizedBox(
             width: 20,
           ),
           Text(
             text2,
-            style: const TextStyle(color: Colors.black),
+            style: const TextStyle(
+              color: Colors.black,
+            ),
           )
         ],
       ),

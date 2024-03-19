@@ -33,9 +33,10 @@ class LoginScreen extends StatelessWidget {
                     const Text(
                       'LOGIN WITH YOUR ACCOUNT',
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 20,
                           color: Color(0xff000e3b),
-                          fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Mogra'),
                     ),
                     const SizedBox(
                       height: 40,
@@ -134,7 +135,8 @@ class PrimayButton extends StatelessWidget {
                 },
                 child: Text(
                   text,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Colors.white, fontFamily: 'Mogra', fontSize: 15),
                 ))),
       ],
     );

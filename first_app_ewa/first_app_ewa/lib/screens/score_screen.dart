@@ -24,7 +24,8 @@ class ScoreScreen extends StatelessWidget {
               ),
               const Text(
                 'Congratuations',
-                style: TextStyle(color: Colors.yellow, fontSize: 30),
+                style: TextStyle(
+                    color: Colors.yellow, fontSize: 30, fontFamily: 'Mogra'),
               ),
               const SizedBox(
                 height: 25,
@@ -71,7 +72,8 @@ class ScoreScreen extends StatelessWidget {
                   },
                   child: const Text(
                     'Play again',
-                    style: TextStyle(color: Colors.green),
+                    style: TextStyle(
+                        color: Colors.green, fontFamily: 'Mogra', fontSize: 16),
                   )),
             ],
           ),
