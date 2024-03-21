@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          textfieldLogin('User name', Icons.person, true,
+                          textfieldLogin('User name', Icons.person, false,
                               (value) {
                             if (value.isEmpty) {
                               return 'Please fill out the field';
