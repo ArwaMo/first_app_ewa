@@ -3,8 +3,18 @@
 import 'package:first_app_ewa/screens/score_screen.dart';
 import 'package:flutter/material.dart';
 
-class QuestionScreen extends StatelessWidget {
-  const QuestionScreen({super.key});
+class QuestionScreen extends StatefulWidget {
+  QuestionScreen({super.key, required this.questin});
+
+  final List questin;
+
+  @override
+  State<QuestionScreen> createState() => _QuestionScreenState();
+}
+
+class _QuestionScreenState extends State<QuestionScreen> {
+  int currentIndex = 2;
+  int score = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +26,11 @@ class QuestionScreen extends StatelessWidget {
             const SizedBox(
               height: 100,
             ),
-            const Align(
+            Align(
               alignment: AlignmentDirectional.topStart,
               child: Text(
-                'Question 13/50',
-                style: TextStyle(
+                'Question ${currentIndex - 1}/${widget.questin.length - 2}', //change number
+                style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     fontFamily: 'Mogra'),
@@ -33,7 +43,7 @@ class QuestionScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               child: Stack(children: [
                 Image.asset(
-                  'assets/images/background_programming.jpg',
+                  '${widget.questin[1]['backgroundImage']}',
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height / 5.5,
@@ -44,9 +54,11 @@ class QuestionScreen extends StatelessWidget {
                       Container(
                         constraints:
                             const BoxConstraints(maxWidth: 300, maxHeight: 121),
-                        child: const Text(
-                          'What is the capital of Suadi Arabia?',
-                          style: TextStyle(fontSize: 22, color: Colors.white),
+                        child: Text(
+                          '${widget.questin[currentIndex]['ques']}',
+                          style: const TextStyle(
+                              fontSize: 22,
+                              color: Color.fromARGB(255, 255, 255, 255)),
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -58,17 +70,23 @@ class QuestionScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            buttonAnswerQues('A.', 'Cairo', context),
-            buttonAnswerQues('B.', 'Tunisia', context),
-            buttonAnswerQues('C.', 'Riyadh', context),
-            buttonAnswerQues('D.', 'Manama', context),
+            for (int i = 0;
+                i < widget.questin[currentIndex]['answers'].length;
+                i++)
+              buttonAnswerQues(
+                widget.questin[currentIndex]['answers'][i]['numbering'],
+                widget.questin[currentIndex]['answers'][i]['option'],
+                context,
+                widget.questin[currentIndex]['answers'][i]['isCorrect'],
+              )
           ],
         ),
       ),
     );
   }
 
-  ElevatedButton buttonAnswerQues(String text1, String text2, context) {
+  ElevatedButton buttonAnswerQues(
+      String text1, String text2, context, bool isTrue) {
     return ElevatedButton(
       child: Row(
         children: [
@@ -77,25 +95,40 @@ class QuestionScreen extends StatelessWidget {
             style: const TextStyle(color: Colors.black, fontFamily: 'Mogra'),
           ),
           const SizedBox(
-            width: 20,
+            width: 8,
           ),
-          Text(
-            text2,
-            style: const TextStyle(
-              color: Colors.black,
+          Expanded(
+            child: Text(
+              text2,
+              style: const TextStyle(
+                color: Colors.black,
+              ),
             ),
           )
         ],
       ),
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ScoreScreen()),
-        );
+        if (isTrue) {
+          score += 1;
+        }
+        if (currentIndex <= widget.questin.length - 2) {
+          setState(() {
+            currentIndex += 1;
+          });
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ScoreScreen(
+                      score: score,
+                      question: widget.questin,
+                    )),
+          );
+        }
       },
       style: const ButtonStyle(
         backgroundColor:
-            MaterialStatePropertyAll(Color.fromARGB(213, 254, 235, 63)),
+            MaterialStatePropertyAll(Color.fromARGB(255, 236, 203, 106)),
         side: MaterialStatePropertyAll(BorderSide(color: Colors.grey)),
         shape: MaterialStatePropertyAll(ContinuousRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)))),

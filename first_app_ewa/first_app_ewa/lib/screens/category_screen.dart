@@ -1,3 +1,4 @@
+import 'package:first_app_ewa/Data/all_questions.dart';
 import 'package:first_app_ewa/screens/question_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class CategoryScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height / 9,
+              height: MediaQuery.of(context).size.height / 6,
             ),
             const Text(
               'CHOOSE CATEGORY',
@@ -31,12 +32,12 @@ class CategoryScreen extends StatelessWidget {
                     color: Color.fromARGB(255, 255, 255, 255)),
                 child: Column(
                   children: [
-                    categoryQuiz(context, Colors.yellow, 'Programming quiz',
-                        'assets/images/programmer.png'),
-                    categoryQuiz(context, Colors.blue, 'History quiz',
-                        'assets/images/History.png'),
-                    categoryQuiz(context, Colors.red, 'Sport quiz',
-                        'assets/images/sport.png'),
+                    categoryQuiz(context, Colors.yellow,
+                        'assets/images/programmer.png', programmingQuestions),
+                    categoryQuiz(context, Colors.blue,
+                        'assets/images/History.png', historyQuestions),
+                    categoryQuiz(context, Colors.red, 'assets/images/sport.png',
+                        sportQuestions),
                   ],
                 )),
           ],
@@ -46,13 +47,16 @@ class CategoryScreen extends StatelessWidget {
   }
 
   Expanded categoryQuiz(
-      BuildContext context, Color color, String text, String image) {
+      BuildContext context, Color color, String image, List question) {
     return Expanded(
       child: InkWell(
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const QuestionScreen()),
+            MaterialPageRoute(
+                builder: (context) => QuestionScreen(
+                      questin: question,
+                    )),
           );
         },
         child: Container(
@@ -74,7 +78,7 @@ class CategoryScreen extends StatelessWidget {
                 ),
                 Center(
                     child: Text(
-                  text,
+                  question[0]['quesName'],
                   style: const TextStyle(fontSize: 20, fontFamily: 'Mogra'),
                 )),
               ],

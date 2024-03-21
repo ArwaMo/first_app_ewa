@@ -1,9 +1,11 @@
 import 'package:first_app_ewa/screens/splash_screen.dart';
+import 'package:first_app_ewa/utils/global_variable.dart';
 import 'package:flutter/material.dart';
 
 class ScoreScreen extends StatelessWidget {
-  const ScoreScreen({super.key});
-
+  const ScoreScreen({super.key, required this.score, required this.question});
+  final int score;
+  final List question;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +29,13 @@ class ScoreScreen extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.yellow, fontSize: 30, fontFamily: 'Mogra'),
               ),
+              Text(
+                controller.text,
+                style: const TextStyle(
+                  color: Colors.yellow,
+                  fontSize: 17,
+                ),
+              ),
               const SizedBox(
                 height: 25,
               ),
@@ -38,16 +47,16 @@ class ScoreScreen extends StatelessWidget {
                 height: 10,
               ),
               RichText(
-                text: const TextSpan(
-                  style: TextStyle(fontSize: 50),
+                text: TextSpan(
+                  style: const TextStyle(fontSize: 50),
                   children: <TextSpan>[
                     TextSpan(
-                        text: '4 ',
-                        style: TextStyle(
+                        text: '$score ',
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.green,
                         )),
-                    TextSpan(text: '/ 10'),
+                    TextSpan(text: '/ ${question.length - 2}'),
                   ],
                 ),
               ),
