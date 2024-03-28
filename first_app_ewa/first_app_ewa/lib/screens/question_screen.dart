@@ -3,6 +3,7 @@
 import 'package:first_app_ewa/screens/score_screen.dart';
 import 'package:flutter/material.dart';
 
+///تنبيه dialog قبل الخروج من الاسئله
 class QuestionScreen extends StatefulWidget {
   QuestionScreen({super.key, required this.questin});
 
@@ -15,7 +16,7 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   int currentIndex = 2;
   int score = 0;
-
+  bool color = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,6 +88,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   ElevatedButton buttonAnswerQues(
       String text1, String text2, context, bool isTrue) {
+    Color buttonColor = Colors.yellow; // Default color
     return ElevatedButton(
       child: Row(
         children: [
@@ -110,7 +112,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
       onPressed: () {
         if (isTrue) {
           score += 1;
+          buttonColor = Colors.green;
+        } else {
+          buttonColor = Colors.red;
         }
+        setState(() {});
         if (currentIndex <= widget.questin.length - 2) {
           setState(() {
             currentIndex += 1;
@@ -119,19 +125,21 @@ class _QuestionScreenState extends State<QuestionScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => ScoreScreen(
-                      score: score,
-                      question: widget.questin,
-                    )),
+              builder: (context) => ScoreScreen(
+                score: score,
+                question: widget.questin,
+              ),
+            ),
           );
         }
       },
-      style: const ButtonStyle(
-        backgroundColor:
-            MaterialStatePropertyAll(Color.fromARGB(255, 236, 203, 106)),
-        side: MaterialStatePropertyAll(BorderSide(color: Colors.grey)),
-        shape: MaterialStatePropertyAll(ContinuousRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10)))),
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(buttonColor),
+        side: MaterialStateProperty.all(const BorderSide(color: Colors.grey)),
+        shape: MaterialStateProperty.all(
+          const ContinuousRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+        ),
       ),
     );
   }

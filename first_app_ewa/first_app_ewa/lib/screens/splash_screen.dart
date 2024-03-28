@@ -60,11 +60,11 @@ class SplashScreen extends StatelessWidget {
                   fun: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => LoginScreen()),
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
                     );
                   },
-                )
+                  color: 0xff18A558,
+                ),
               ],
             ),
           ),

@@ -57,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                                 .hasMatch(value)) {
                               return 'Please write your email correctly';
                             }
-                          }, null),
+                          }, controllerEmail),
                           const SizedBox(
                             height: 10,
                           ),
@@ -70,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                             } else if (value.length < 4) {
                               return 'Please write username greater than 3';
                             }
-                          }, controller),
+                          }, controllerUserName),
                           const SizedBox(
                             height: 10,
                           ),
@@ -80,22 +80,24 @@ class LoginScreen extends StatelessWidget {
                             } else if (value.length < 7) {
                               return 'Please type a password longer than 6';
                             }
-                          }, null),
+                          }, controllerPass),
                           const SizedBox(
                             height: 20,
                           ),
                           PrimayButton(
-                              text: 'SIGN IN',
-                              fun: () {
-                                if (_formKey.currentState!.validate()) {
-                                  Navigator.push(
+                            text: 'SIGN IN',
+                            fun: () {
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             const CategoryScreen()),
-                                  );
-                                }
-                              }),
+                                    (route) => false);
+                              }
+                            },
+                            color: 0xff18A558,
+                          ),
                           const SizedBox(
                             height: 8,
                           ),
@@ -136,7 +138,7 @@ class LoginScreen extends StatelessWidget {
   }
 
   TextFormField textfieldLogin(String text, IconData icon, bool secure,
-      Function validate, TextEditingController? controller) {
+      Function validate, TextEditingController controller) {
     return TextFormField(
       controller: controller,
       validator: (value) {
@@ -159,21 +161,25 @@ class PrimayButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.fun,
+    required this.color,
   });
   final String text;
   final Function() fun;
+  final int color;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
             child: ElevatedButton(
-                style: const ButtonStyle(
-                    shape: MaterialStatePropertyAll(ContinuousRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)))),
-                    padding: MaterialStatePropertyAll(EdgeInsets.all(16)),
+                style: ButtonStyle(
+                    shape: const MaterialStatePropertyAll(
+                        ContinuousRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10)))),
+                    padding: const MaterialStatePropertyAll(EdgeInsets.all(16)),
                     backgroundColor: MaterialStatePropertyAll(
-                      Colors.green,
+                      Color(color),
                     )),
                 onPressed: () {
                   fun();

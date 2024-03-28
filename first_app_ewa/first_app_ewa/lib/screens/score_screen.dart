@@ -1,3 +1,5 @@
+import 'package:first_app_ewa/screens/category_screen.dart';
+import 'package:first_app_ewa/screens/login_screen.dart';
 import 'package:first_app_ewa/screens/splash_screen.dart';
 import 'package:first_app_ewa/utils/global_variable.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +32,7 @@ class ScoreScreen extends StatelessWidget {
                     color: Colors.yellow, fontSize: 30, fontFamily: 'Mogra'),
               ),
               Text(
-                controller.text,
+                controllerUserName.text,
                 style: const TextStyle(
                   color: Colors.yellow,
                   fontSize: 17,
@@ -76,7 +78,7 @@ class ScoreScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SplashScreen()),
+                          builder: (context) => const CategoryScreen()),
                     );
                   },
                   child: const Text(
@@ -84,6 +86,22 @@ class ScoreScreen extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.green, fontFamily: 'Mogra', fontSize: 16),
                   )),
+              SizedBox(
+                height: 10,
+              ),
+              PrimayButton(
+                text: 'SIGN OUT',
+                fun: () {
+                  controllerUserName.clear();
+                  controllerEmail.clear();
+                  controllerPass.clear();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SplashScreen()),
+                  );
+                },
+                color: 0xffE50000,
+              )
             ],
           ),
         ),

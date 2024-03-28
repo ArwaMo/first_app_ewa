@@ -1,3 +1,5 @@
 import 'package:flutter/material.dart';
 
-TextEditingController controller=TextEditingController();
+TextEditingController controllerUserName=TextEditingController();
+TextEditingController controllerEmail=TextEditingController();
+TextEditingController controllerPass=TextEditingController();
